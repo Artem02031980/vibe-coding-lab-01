@@ -1,6 +1,12 @@
-.light {
+/* style.css */
+
+/* Add transition to the body for smooth theme switching */
+body {
   background-color: aliceblue;
   color: rgb(53, 53, 53);
+  transition: background-color 0.5s ease, color 0.3s ease;
+  margin: 0; /* Optional: reset default margin */
+  min-height: 100vh; /* Optional: ensure full height for background */
 }
 
 .dark {
