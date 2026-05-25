@@ -1,0 +1,73 @@
+/* --- Responsive Adjustments --- */
+
+/* Tablet Styles (481px – 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  input, textarea {
+    font-size: 15px;
+  }
+}
+
+/* Mobile Styles (up to 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+    /* width and box-sizing are now handled in main style.css for consistency, 
+       but keeping specific overrides here if needed */
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  /* Adjust header navigation for mobile to prevent crowding */
+  .header-nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  #themeToggle {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .header-nav a {
+    display: block;
+    padding: 10px 0;
+  }
+
+  /* Form elements adjustments for mobile */
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input, textarea {
+    padding: 12px; /* Larger padding for easier touch interaction */
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  #submitBtn {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* Adjust success message for smaller screens */
+  .success-message {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
