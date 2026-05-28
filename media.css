@@ -36,8 +36,7 @@
     text-align: center;
   }
 
-  #themeToggle {
-    width: 100%;
+  #themeToggle {    
     margin-bottom: 5px;
   }
 
@@ -69,5 +68,10 @@
   .success-message {
     padding: 10px;
     font-size: 14px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;    
   }
 }

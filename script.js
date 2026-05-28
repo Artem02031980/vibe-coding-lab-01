@@ -104,10 +104,12 @@ if (contactForm) {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Отправить';
         
-        // Hide success message after 3 seconds (Fade Out via CSS)
+        // Redirect to thanks.html after 1.5 seconds total (or slightly after success msg)
+        // The prompt asks to redirect after 1.5s. 
+        // Let's redirect 1.5s after the "network" request finishes.
         setTimeout(() => {
-          successMessage.classList.add('hidden');
-        }, 3000);
+            window.location.href = './thanks.html';
+        }, 1500);
         
       }, 1000);
     }

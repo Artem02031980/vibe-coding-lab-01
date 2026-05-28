@@ -70,6 +70,7 @@ body {
 
 /* --- Link Button Style (Used in Index) --- */
 .actions {
+  display: flex;
   margin-top: 20px;
   display: flex;
   gap: 10px;
