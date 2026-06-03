@@ -10,8 +10,17 @@
     font-size: 1.8rem;
   }
 
-  input, textarea {
+  input,
+  textarea {
     font-size: 15px;
+  }
+
+  .services {
+    gap: 15px;
+  }
+
+  .service-card {
+    padding: 15px;
   }
 }
 
@@ -36,7 +45,7 @@
     text-align: center;
   }
 
-  #themeToggle {    
+  #themeToggle {
     margin-bottom: 5px;
   }
 
@@ -54,7 +63,8 @@
     font-size: 14px;
   }
 
-  input, textarea {
+  input,
+  textarea {
     padding: 12px; /* Larger padding for easier touch interaction */
     font-size: 16px; /* Prevents iOS zoom on focus */
   }
@@ -72,6 +82,22 @@
 
   .actions {
     flex-direction: column;
-    align-items: flex-start;    
+    align-items: flex-start;
+  }
+
+  .services {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+  }
+
+  .service-icon {
+    font-size: 2.5rem;
+  }
+
+  .service-title {
+    font-size: 1.1rem;
+  }
+
+  .service-btn {
+    max-width: 100%; /* Full width button on mobile */
   }
 }
