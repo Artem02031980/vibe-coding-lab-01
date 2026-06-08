@@ -100,4 +100,58 @@
   .service-btn {
     max-width: 100%; /* Full width button on mobile */
   }
+
+  /* FAQ Adjustments for Mobile */
+
+  /* Make the switcher full width and vertical */
+  .faq-controls {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    left: 0;
+    transform: none;
+    padding: 5px;
+    gap: 5px;
+  }
+
+  .faq-mode-label {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid transparent; /* Prevents layout shift on hover */
+  }
+
+  /* Active state on mobile needs to be more distinct */
+  .faq-mode-label:has(input:checked) {
+    border-color: #007bff;
+  }
+
+  .dark .faq-mode-label:has(input:checked) {
+    border-color: #4da3ff;
+  }
+
+  .faq-question {
+    padding: 20px 0; /* Larger touch area */
+    font-size: 1rem;
+  }
+
+  .faq-answer-content {
+    font-size: 0.95rem;
+  }
+
+  /* FAQ Adjustments for Mobile */
+
+  .faq-controls {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .faq-question {
+    padding: 20px 0; /* Larger touch area */
+    font-size: 1rem;
+  }
+
+  .faq-answer-content {
+    font-size: 0.95rem;
+  }
 }

@@ -200,3 +200,60 @@ if ("IntersectionObserver" in window) {
   const serviceCards = document.querySelectorAll(".service-card");
   serviceCards.forEach((card) => card.classList.add("visible"));
 }
+
+// --- FAQ Accordion Logic with Mode Switcher ---
+
+const faqList = document.querySelector(".faq-list");
+const faqQuestions = document.querySelectorAll(".faq-question");
+const modeInputs = document.querySelectorAll("input[name='faqMode']");
+
+// Function to handle click on a question
+function handleQuestionClick(clickedQuestion) {
+  const isExpanded = clickedQuestion.getAttribute("aria-expanded") === "true";
+  
+  // Check current mode
+  const singleMode = document.querySelector("input[name='faqMode'][value='single']").checked;
+
+  if (singleMode) {
+    // Single Mode: Close all others first
+    faqQuestions.forEach((otherQuestion) => {
+      if (otherQuestion !== clickedQuestion) {
+        otherQuestion.setAttribute("aria-expanded", "false");
+      }
+    });
+    
+    // Toggle the clicked one
+    // If it was open, it closes. If closed, it opens (and others are already closed).
+    clickedQuestion.setAttribute("aria-expanded", !isExpanded);
+  } else {
+    // Multiple Mode: Just toggle the clicked one
+    clickedQuestion.setAttribute("aria-expanded", !isExpanded);
+  }
+}
+
+// Attach event listeners to questions
+faqQuestions.forEach((question) => {
+  question.addEventListener("click", () => {
+    handleQuestionClick(question);
+  });
+});
+
+// Optional: If switching from Multiple to Single, you might want to close all but the first open one?
+// For now, we just let the state be until the user clicks again, which is standard behavior.
+// However, if you want strict enforcement when switching modes:
+modeInputs.forEach((input) => {
+  input.addEventListener("change", () => {
+    if (input.value === "single") {
+      // Find the first open item
+      const openItem = document.querySelector(".faq-question[aria-expanded='true']");
+      if (openItem) {
+        // Close all others
+        faqQuestions.forEach((q) => {
+          if (q !== openItem) {
+            q.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+    }
+  });
+});

@@ -64,6 +64,87 @@
           <button class="service-btn">Подробнее</button>
         </article>
       </section>
+
+      <section class="faq">
+        <h2>Часто задаваемые вопросы</h2>
+
+        <!-- Mode Switcher -->
+        <div class="faq-controls">
+          <label class="faq-mode-label">
+            <input type="radio" name="faqMode" value="single" checked />
+            <p>Один открытый</p>
+          </label>
+          <label class="faq-mode-label">
+            <input type="radio" name="faqMode" value="multiple" />
+            <p>Несколько открытых</p>
+          </label>
+        </div>
+
+        <!-- FAQ Items Container -->
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Что такое Vibe Coding?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                <p>
+                  Vibe Coding — это подход к разработке, ориентированный на
+                  поток и интуитивное понимание задачи, часто с использованием
+                  AI-ассистентов для ускорения процесса.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Какие технологии вы используете?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                <p>
+                  Мы специализируемся на нативном JavaScript, HTML5, CSS3, а
+                  также используем современные фреймворки при необходимости,
+                  такие как React или Vue.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Сколько времени занимает разработка?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                <p>
+                  Сроки зависят от сложности проекта. Лендинг может занять от 3
+                  дней, тогда как сложное веб-приложение — от 2 недель.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Поддерживаете ли вы мобильные версии?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                <p>
+                  Да, все наши проекты разрабатываются по принципу Mobile First
+                  и полностью адаптивны под любые устройства.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <script src="./script.js"></script>
   </body>
