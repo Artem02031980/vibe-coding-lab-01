@@ -26,7 +26,7 @@
         <a href="./contact.html">Посмотреть контакты</a>
       </div>
 
-      <section class="services">
+      <section class="services" data-service-id="ui-ux">
         <article class="service-card">
           <div class="service-icon">🚀</div>
           <h3 class="service-title">Web Development</h3>
@@ -34,35 +34,81 @@
             Creating fast, responsive, and modern websites tailored to your
             business needs.
           </p>
-          <button class="service-btn">Подробнее</button>
+          <button
+            class="service-btn"
+            data-modal-trigger="service-details"
+            data-target-id="ui-ux"
+          >
+            Подробнее
+          </button>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-id="ui-ux">
           <div class="service-icon">💻</div>
           <h3 class="service-title">Frontend Dev</h3>
           <p class="service-description">
             Building interactive UIs with HTML, CSS, and JavaScript.
           </p>
-          <button class="service-btn">Подробнее</button>
+          <button
+            class="service-btn"
+            data-modal-trigger="service-details"
+            data-target-id="ui-ux"
+          >
+            Подробнее
+          </button>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-id="ui-ux">
           <div class="service-icon">🎨</div>
           <h3 class="service-title">UI/UX Design</h3>
           <p class="service-description">
             Creating intuitive and aesthetically pleasing user experiences.
           </p>
-          <button class="service-btn">Подробнее</button>
+          <button
+            class="service-btn"
+            data-modal-trigger="service-details"
+            data-target-id="ui-ux"
+          >
+            Подробнее
+          </button>
         </article>
 
-        <article class="service-card">
+        <article class="service-card" data-service-id="ui-ux">
           <div class="service-icon">⚙️</div>
           <h3 class="service-title">Backend API</h3>
           <p class="service-description">
             Developing robust server-side logic and database integration.
           </p>
-          <button class="service-btn">Подробнее</button>
+          <button
+            class="service-btn"
+            data-modal-trigger="service-details"
+            data-target-id="ui-ux"
+          >
+            Подробнее
+          </button>
         </article>
+
+        <div
+          class="service-modal"
+          id="serviceModal"
+          aria-hidden="true"
+          role="dialog"
+          aria-labelledby="modalTitle"
+          aria-describedby="modalDesc"
+        >
+          <div class="modal-overlay"></div>
+          <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">
+              &times;
+            </button>
+            <div class="modal-body">
+              <div class="modal-icon" id="modalIcon"></div>
+              <h2 class="modal-title" id="modalTitle"></h2>
+              <div class="modal-description" id="modalDesc"></div>
+              <button class="modal-action-btn">Заказать услугу</button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="faq">

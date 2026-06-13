@@ -154,4 +154,20 @@
   .faq-answer-content {
     font-size: 0.95rem;
   }
+
+  /* Mobile Modal Adjustments */
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
+
+  .modal-close {
+    top: 5px;
+    right: 10px;
+    font-size: 1.8rem;
+  }
 }

@@ -210,9 +210,11 @@ const modeInputs = document.querySelectorAll("input[name='faqMode']");
 // Function to handle click on a question
 function handleQuestionClick(clickedQuestion) {
   const isExpanded = clickedQuestion.getAttribute("aria-expanded") === "true";
-  
+
   // Check current mode
-  const singleMode = document.querySelector("input[name='faqMode'][value='single']").checked;
+  const singleMode = document.querySelector(
+    "input[name='faqMode'][value='single']",
+  ).checked;
 
   if (singleMode) {
     // Single Mode: Close all others first
@@ -221,7 +223,7 @@ function handleQuestionClick(clickedQuestion) {
         otherQuestion.setAttribute("aria-expanded", "false");
       }
     });
-    
+
     // Toggle the clicked one
     // If it was open, it closes. If closed, it opens (and others are already closed).
     clickedQuestion.setAttribute("aria-expanded", !isExpanded);
@@ -245,7 +247,9 @@ modeInputs.forEach((input) => {
   input.addEventListener("change", () => {
     if (input.value === "single") {
       // Find the first open item
-      const openItem = document.querySelector(".faq-question[aria-expanded='true']");
+      const openItem = document.querySelector(
+        ".faq-question[aria-expanded='true']",
+      );
       if (openItem) {
         // Close all others
         faqQuestions.forEach((q) => {
@@ -254,6 +258,113 @@ modeInputs.forEach((input) => {
           }
         });
       }
+    }
+  });
+});
+
+// MODAL
+
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Data Source for Modal Content ---
+  // In a real app, this might come from an API or JSON file
+  const serviceData = {
+    "web-dev": {
+      title: "Web Development",
+      icon: "🚀",
+      description:
+        "Our Web Development service includes full-cycle creation of websites. We ensure high performance, SEO optimization, and cross-browser compatibility. Perfect for businesses looking to establish a strong online presence.",
+    },
+    frontend: {
+      title: "Frontend Dev",
+      icon: "💻",
+      description:
+        "We build responsive and interactive user interfaces using modern standards like HTML5, CSS3, and Vanilla JavaScript. We focus on clean code and smooth animations to enhance user experience.",
+    },
+    "ui-ux": {
+      title: "UI/UX Design",
+      icon: "🎨",
+      description:
+        "Our design process involves user research, wireframing, and prototyping. We create intuitive layouts that guide users naturally through your application, ensuring high conversion rates.",
+    },
+    backend: {
+      title: "Backend API",
+      icon: "⚙️",
+      description:
+        "Robust server-side solutions using Node.js or Python. We design secure RESTful APIs, manage database structures, and ensure your application scales efficiently as your user base grows.",
+    },
+  };
+
+  // --- DOM Elements ---
+  const modal = document.getElementById("serviceModal");
+  const modalOverlay = modal.querySelector(".modal-overlay");
+  const closeBtn = modal.querySelector(".modal-close");
+  const triggerButtons = document.querySelectorAll(
+    '[data-modal-trigger="service-details"]',
+  );
+
+  // Content Elements
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalIcon = document.getElementById("modalIcon");
+
+  // --- Functions ---
+
+  /**
+   * Opens the modal and populates it with data based on the target ID
+   * @param {string} targetId - The ID corresponding to serviceData keys
+   */
+  const openModal = (targetId) => {
+    const data = serviceData[targetId];
+
+    if (!data) return; // Exit if no data found
+
+    // Populate content
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.description;
+    modalIcon.textContent = data.icon;
+
+    // Show modal
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+
+    // Prevent background scrolling
+    document.body.classList.add("modal-open");
+
+    // Focus management: Move focus to the close button for accessibility
+    closeBtn.focus();
+  };
+
+  /**
+   * Closes the modal and resets state
+   */
+  const closeModal = () => {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+
+    // Restore background scrolling
+    document.body.classList.remove("modal-open");
+  };
+
+  // --- Event Listeners ---
+
+  // 1. Open Modal on Button Click
+  triggerButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const targetId = e.currentTarget.getAttribute("data-target-id");
+      openModal(targetId);
+    });
+  });
+
+  // 2. Close on "X" Click
+  closeBtn.addEventListener("click", closeModal);
+
+  // 3. Close on Overlay Click (outside content)
+  modalOverlay.addEventListener("click", closeModal);
+
+  // 4. Close on Escape Key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
+      closeModal();
     }
   });
 });
