@@ -380,15 +380,14 @@ textarea.error {
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+  pointer-events: none;
 }
 
 /* Active state for visibility */
 .service-modal.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 /* Overlay background */
@@ -400,6 +399,12 @@ textarea.error {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-modal.active .modal-overlay {
+  opacity: 1;
 }
 
 /* Modal Content Box */
@@ -411,15 +416,19 @@ textarea.error {
   width: 90%;
   max-width: 500px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
+  transform: scale(0.9) translateY(20px);
+  opacity: 0;
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.3s ease;
   max-height: 90vh;
   overflow-y: auto;
 }
 
 /* Animation when active */
 .service-modal.active .modal-content {
-  transform: translateY(0);
+  transform: scale(1) translateY(0);
+  opacity: 1;
 }
 
 /* Dark Mode Support */
