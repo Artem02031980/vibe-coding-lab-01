@@ -368,3 +368,180 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// --- Smart Search Component Logic ---
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("serviceSearch");
+  const clearBtn = document.getElementById("clearSearch");
+  const noResultsMsg = document.getElementById("noResults");
+  const resetBtn = document.getElementById("resetSearchBtn");
+  const servicesContainer = document.getElementById("servicesContainer");
+  const cards = document.querySelectorAll(".service-card");
+
+  let focusedCardIndex = -1; // Tracks keyboard navigation index
+
+  /**
+   * Debounce function to limit execution rate
+   * @param {Function} func - The function to debounce
+   * @param {number} wait - Time in milliseconds to wait
+   * @returns {Function} Debounced function
+   */
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+
+  /**
+   * Filters cards based on search query
+   * @param {string} query - The search term
+   */
+  function filterCards(query) {
+    const lowerQuery = query.toLowerCase().trim();
+    let visibleCount = 0;
+
+    // Reset keyboard focus when filtering changes
+    removeKeyboardFocus();
+    focusedCardIndex = -1;
+
+    cards.forEach((card) => {
+      // Get data from attributes
+      const title = card.getAttribute("data-title") || "";
+      const description = card.getAttribute("data-description") || "";
+
+      // Check if query exists in title or description
+      const match =
+        title.toLowerCase().includes(lowerQuery) ||
+        description.toLowerCase().includes(lowerQuery);
+
+      if (match) {
+        card.style.display = ""; // Restore default display (flex/block defined in CSS)
+        // Re-trigger animation if needed by removing/adding class,
+        // but for simple search, just showing is enough.
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    // Toggle "No Results" message
+    if (visibleCount === 0 && lowerQuery !== "") {
+      noResultsMsg.hidden = false;
+    } else {
+      noResultsMsg.hidden = true;
+    }
+
+    // Toggle Clear Button visibility
+    if (lowerQuery !== "") {
+      clearBtn.hidden = false;
+    } else {
+      clearBtn.hidden = true;
+    }
+  }
+
+  /**
+   * Resets the search state completely
+   */
+  function resetSearch() {
+    if (searchInput) searchInput.value = "";
+    filterCards("");
+    if (searchInput) searchInput.focus();
+  }
+
+  /**
+   * Keyboard Navigation Helpers
+   */
+  function removeKeyboardFocus() {
+    cards.forEach((card) => card.classList.remove("keyboard-focused"));
+  }
+
+  function focusCard(index) {
+    removeKeyboardFocus();
+    if (index >= 0 && index < cards.length) {
+      // Only focus if the card is currently visible (not filtered out)
+      if (cards[index].style.display !== "none") {
+        cards[index].classList.add("keyboard-focused");
+        cards[index].scrollIntoView({ behavior: "smooth", block: "nearest" });
+        focusedCardIndex = index;
+      }
+    }
+  }
+
+  // Event Listeners
+
+  // 1. Input Handler with Debounce (300ms)
+  if (searchInput) {
+    searchInput.addEventListener(
+      "input",
+      debounce((e) => {
+        filterCards(e.target.value);
+      }, 300),
+    );
+
+    // 2. Keyboard Navigation
+    searchInput.addEventListener("keydown", (e) => {
+      const visibleCards = Array.from(cards).filter(
+        (c) => c.style.display !== "none",
+      );
+
+      if (visibleCards.length === 0) return;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        // Move focus to first visible card if none focused, else next
+        if (focusedCardIndex === -1) {
+          focusedCardIndex = Array.from(cards).indexOf(visibleCards[0]);
+        } else {
+          // Find next visible card index
+          let nextIndex = focusedCardIndex + 1;
+          while (
+            nextIndex < cards.length &&
+            cards[nextIndex].style.display === "none"
+          ) {
+            nextIndex++;
+          }
+          if (nextIndex < cards.length) focusedCardIndex = nextIndex;
+        }
+        focusCard(focusedCardIndex);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (focusedCardIndex === -1) {
+          // If nothing focused, focus last visible card
+          const lastVisible = visibleCards[visibleCards.length - 1];
+          focusedCardIndex = Array.from(cards).indexOf(lastVisible);
+        } else {
+          // Find prev visible card index
+          let prevIndex = focusedCardIndex - 1;
+          while (prevIndex >= 0 && cards[prevIndex].style.display === "none") {
+            prevIndex--;
+          }
+          if (prevIndex >= 0) focusedCardIndex = prevIndex;
+        }
+        focusCard(focusedCardIndex);
+      } else if (e.key === "Enter") {
+        if (focusedCardIndex !== -1) {
+          e.preventDefault();
+          const targetCard = cards[focusedCardIndex];
+          // Trigger click on the button inside the card
+          const btn = targetCard.querySelector(".service-btn");
+          if (btn) btn.click();
+        }
+      } else if (e.key === "Escape") {
+        resetSearch();
+      }
+    });
+  }
+
+  // 3. Clear Button Click
+  if (clearBtn) {
+    clearBtn.addEventListener("click", resetSearch);
+  }
+
+  // 4. Reset Button Click (in No Results message)
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetSearch);
+  }
+});

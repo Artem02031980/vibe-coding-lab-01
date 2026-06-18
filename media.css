@@ -170,4 +170,14 @@
     right: 10px;
     font-size: 1.8rem;
   }
+
+  #serviceSearch {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: 12px 40px 12px 12px;
+  }
+
+  .no-results-message {
+    padding: 30px 15px;
+  }
+
 }

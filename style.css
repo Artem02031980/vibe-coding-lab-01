@@ -516,6 +516,145 @@ body.modal-open {
   overflow: hidden;
 }
 
+/* --- Smart Search Component Styles --- */
+
+.search-container {  
+  margin: 30px 0;
+  position: relative;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#serviceSearch {
+  width: 100%;
+  padding: 12px 40px 12px 15px; /* Right padding for clear button */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#serviceSearch:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.dark #serviceSearch {
+  background-color: #444;
+  border-color: #666;
+  color: #fff;
+}
+
+.dark #serviceSearch:focus {
+  border-color: #4da3ff;
+  box-shadow: 0 0 0 3px rgba(77, 163, 255, 0.2);
+}
+
+/* Clear Button (X) inside input */
+.clear-search-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+}
+
+.clear-search-btn:hover {
+  color: #333;
+}
+
+.dark .clear-search-btn:hover {
+  color: #fff;
+}
+
+/* No Results Message */
+.no-results-message {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+  margin-top: 20px;
+}
+
+.dark .no-results-message {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+.no-results-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+.no-results-message p {
+  margin: 0 0 15px 0;
+  color: #666;
+}
+
+.dark .no-results-message p {
+  color: #ccc;
+}
+
+.reset-btn {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid #007bff;
+  color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.dark .reset-btn {
+  border-color: #4da3ff;
+  color: #4da3ff;
+}
+
+.dark .reset-btn:hover {
+  background-color: #4da3ff;
+  color: #fff;
+}
+
+/* Keyboard Navigation Focus State for Cards */
+.service-card.keyboard-focused {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+  transform: translateY(-5px); /* Match hover effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dark .service-card.keyboard-focused {
+  outline-color: #4da3ff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Utility class to hide elements visually but keep in DOM if needed, 
+   though we use [hidden] attribute which is display:none by default in most browsers */
+[hidden] {
+  display: none !important;
+}
+
 /* --- FAQ Controls (Mode Switcher) --- */
 .faq-controls {
   display: inline-flex;

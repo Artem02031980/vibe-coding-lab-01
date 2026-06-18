@@ -26,8 +26,39 @@
         <a href="./contact.html">Посмотреть контакты</a>
       </div>
 
-      <section class="services" data-service-id="ui-ux">
-        <article class="service-card">
+      <!-- Smart Search Component -->
+      <div class="search-container">
+        <div class="search-wrapper">
+          <input
+            type="search"
+            id="serviceSearch"
+            placeholder="Поиск услуг (например: Web, API)..."
+            aria-label="Поиск по услугам"
+          />
+          <button
+            id="clearSearch"
+            class="clear-search-btn"
+            aria-label="Сбросить поиск"
+            hidden
+          >
+            &times;
+          </button>
+        </div>
+        <div id="noResults" class="no-results-message" hidden>
+          <div class="no-results-icon">🔍</div>
+          <p>Ничего не найдено</p>
+          <button id="resetSearchBtn" class="reset-btn">Сбросить фильтр</button>
+        </div>
+      </div>
+
+      <!-- Update existing .services section to include data attributes for JS logic -->
+      <section class="services" id="servicesContainer">
+        <!-- Example Card 1 -->
+        <article
+          class="service-card"
+          data-title="Web Development"
+          data-description="Creating fast, responsive, and modern websites tailored to your business needs."
+        >
           <div class="service-icon">🚀</div>
           <h3 class="service-title">Web Development</h3>
           <p class="service-description">
@@ -37,13 +68,18 @@
           <button
             class="service-btn"
             data-modal-trigger="service-details"
-            data-target-id="ui-ux"
+            data-target-id="web-dev"
           >
             Подробнее
           </button>
         </article>
 
-        <article class="service-card" data-service-id="ui-ux">
+        <!-- Example Card 2 -->
+        <article
+          class="service-card"
+          data-title="Frontend Dev"
+          data-description="Building interactive UIs with HTML, CSS, and JavaScript."
+        >
           <div class="service-icon">💻</div>
           <h3 class="service-title">Frontend Dev</h3>
           <p class="service-description">
@@ -52,13 +88,18 @@
           <button
             class="service-btn"
             data-modal-trigger="service-details"
-            data-target-id="ui-ux"
+            data-target-id="frontend"
           >
             Подробнее
           </button>
         </article>
 
-        <article class="service-card" data-service-id="ui-ux">
+        <!-- Example Card 3 -->
+        <article
+          class="service-card"
+          data-title="UI/UX Design"
+          data-description="Creating intuitive and aesthetically pleasing user experiences."
+        >
           <div class="service-icon">🎨</div>
           <h3 class="service-title">UI/UX Design</h3>
           <p class="service-description">
@@ -73,7 +114,12 @@
           </button>
         </article>
 
-        <article class="service-card" data-service-id="ui-ux">
+        <!-- Example Card 4 -->
+        <article
+          class="service-card"
+          data-title="Backend API"
+          data-description="Developing robust server-side logic and database integration."
+        >
           <div class="service-icon">⚙️</div>
           <h3 class="service-title">Backend API</h3>
           <p class="service-description">
@@ -82,34 +128,33 @@
           <button
             class="service-btn"
             data-modal-trigger="service-details"
-            data-target-id="ui-ux"
+            data-target-id="backend"
           >
             Подробнее
           </button>
         </article>
+      </section>
 
-        <div
-          class="service-modal"
-          id="serviceModal"
-          aria-hidden="true"
-          role="dialog"
-          aria-labelledby="modalTitle"
-          aria-describedby="modalDesc"
-        >
-          <div class="modal-overlay"></div>
-          <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal">
-              &times;
-            </button>
-            <div class="modal-body">
-              <div class="modal-icon" id="modalIcon"></div>
-              <h2 class="modal-title" id="modalTitle"></h2>
-              <div class="modal-description" id="modalDesc"></div>
-              <button class="modal-action-btn">Заказать услугу</button>
-            </div>
+      <!-- Модальное окно должно быть ЗДЕСЬ, вне секции services -->
+      <div
+        class="service-modal"
+        id="serviceModal"
+        aria-hidden="true"
+        role="dialog"
+        aria-labelledby="modalTitle"
+        aria-describedby="modalDesc"
+      >
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close modal">&times;</button>
+          <div class="modal-body">
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="modal-description" id="modalDesc"></div>
+            <button class="modal-action-btn">Заказать услугу</button>
           </div>
         </div>
-      </section>
+      </div>
 
       <section class="faq">
         <h2>Часто задаваемые вопросы</h2>
